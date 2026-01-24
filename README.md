@@ -1,4 +1,4 @@
-# FS22 Random World Events (v1.0.5.0)
+# FS22 Random World Events
 
 Adds dynamic random events to Farming Simulator 22 to make gameplay more unpredictable and exciting.
 

@@ -39,35 +39,6 @@ Original mod page: https://www.kingmods.net/en/fs22/mods/73950/random-world-even
 
 ---
 
-## 🧠 Console Commands
-
-### Basic Commands
-
-| Command | Description |
-|--------|-------------|
-| `events` | Show help |
-| `events status` | Show current settings |
-| `events enable` | Enable all events |
-| `events disable` | Disable all events |
-| `events reload` | Reload settings from XML |
-
-### Event Management
-
-| Command | Example | Description |
-|--------|---------|-------------|
-| `events trigger <eventId>` | `events trigger market_boom` | Manually trigger an event |
-| `events list` | - | Show all enabled events |
-| `events enable <category/event>` | `events enable economic` | Enable a category or event |
-| `events disable <category/event>` | `events disable vehicle` | Disable a category or event |
-| `events frequency <1-10>` | `events frequency 7` | Set frequency |
-| `events intensity <1-5>` | `events intensity 4` | Set intensity |
-| `events cooldown <minutes>` | `events cooldown 60` | Set cooldown |
-| `events skip` | - | Skip the current active event |
-| `events history` | - | Show recent event history |
-| `events test` | - | Trigger a random event for testing |
-
----
-
 ## ⚖️ License
 
 All rights reserved. Unauthorized redistribution, copying, or claiming this mod as your own is **strictly prohibited**.  

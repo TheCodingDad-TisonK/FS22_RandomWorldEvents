@@ -20,11 +20,13 @@ Adds dynamic random events to Farming Simulator 22 to make gameplay more unpredi
 - Active events end automatically after duration
 - In-game notifications for all events
 
+
 🔥 **Fully integrated physics system for vehicles:**
 - Adjustable wheel grip multiplier
 - Adjustable suspension stiffness
 - Articulation damping and center-of-mass strength modifiers
 - Works automatically with controlled vehicles
+
 
 🛠️ **Key Bindings:**
 - `F3` → Open mod settings GUI

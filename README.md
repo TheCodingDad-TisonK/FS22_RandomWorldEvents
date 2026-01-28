@@ -57,7 +57,7 @@ Original author: **TisonK**
 
 ## 📬 Support
 
-Report bugs or request help in the comments section of the original mod page.
+Report bugs or request by creating a issue.
 
 ---
 

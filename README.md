@@ -14,14 +14,22 @@ Adds dynamic random events to Farming Simulator 22 to make gameplay more unpredi
 
 ## 🧾 Features
 
-- 🌍 **Random world events** triggered over time
-- 🔁 **Event cooldown system** to prevent spamming
-- 🔥 **Event intensity & frequency controls**
-- 📣 **In-game notifications & warnings**
-- 🧠 **Debug mode with logging**
-- 🛠️ **Event categories you can enable/disable**
-- 🧾 **Event history tracking**
-- 🧩 **Mod settings available in pause menu**
+🌍 **Random event system:**
+- Configurable frequency, intensity, and cooldowns
+- Events trigger automatically or via debug key
+- Active events end automatically after duration
+- In-game notifications for all events
+
+🔥 **Fully integrated physics system for vehicles:**
+- Adjustable wheel grip multiplier
+- Adjustable suspension stiffness
+- Articulation damping and center-of-mass strength modifiers
+- Works automatically with controlled vehicles
+
+🛠️ **Key Bindings:**
+`F3` → Open mod settings GUI
+`F5` → Print debug table to console
+`F6` → Trigger a random event
 
 ---
 
@@ -35,7 +43,6 @@ Adds dynamic random events to Farming Simulator 22 to make gameplay more unpredi
 | cooldown | `30` | Minimum minutes between events |
 | showNotifications | `true` | Show notifications |
 | showWarnings | `true` | Show warnings |
-| debugLevel | `1` | Debug verbosity (0–2) |
 
 ---
 

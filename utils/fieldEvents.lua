@@ -1,5 +1,5 @@
 -- =========================================================
--- Random World Events (version 1.2.0.0)
+-- Random World Events (version 1.3.0.0)
 -- =========================================================
 -- Random events that can occur. Settings can be changed!
 -- =========================================================
@@ -63,8 +63,7 @@ local fieldEvents = {
 }
 
 for _, e in pairs(fieldEvents) do
-    eventId = eventId + 1
-    RandomWorldEvents.EVENTS[e.name] = {
+    g_RandomWorldEvents:registerEvent({
         name = e.name,
         category = "field",
         weight = 1,
@@ -89,7 +88,7 @@ for _, e in pairs(fieldEvents) do
             RandomWorldEvents.EVENT_STATE.fieldSaleMalus = nil
             return "Field event ended"
         end
-    }
+    })
 end
 
-print("[FieldEvents] 10 field events loaded")
+print("[FieldEvents] Loaded 10 field events")

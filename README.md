@@ -21,7 +21,7 @@ Original mod page: https://www.kingmods.net/en/fs22/mods/73950/random-world-even
 - 🧠 **Debug mode with logging**
 - 🛠️ **Event categories you can enable/disable**
 - 🧾 **Event history tracking**
-- 🧩 **Mod settings available in pause menu (if supported)**
+- 🧩 **Mod settings available in pause menu**
 
 ---
 

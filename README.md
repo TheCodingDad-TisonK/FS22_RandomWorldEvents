@@ -57,7 +57,7 @@ Original author: **TisonK**
 
 ## 📬 Support
 
-Report bugs or request by creating a issue.
+Report bugs or request by creating a issue on Github.
 
 ---
 

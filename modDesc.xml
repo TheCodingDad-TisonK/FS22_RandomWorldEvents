@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="61">
+    <author>TisonK</author>
+    <version>1.2.0.0</version>
+    <title>
+        <en>Random World Events</en>
+    </title>
+    <description>
+        <en><![CDATA[Random events that can occur. Settings can be changed!]]></en>
+    </description>
+    <iconFilename>icon_FS22_RandomWorldEvents.dds</iconFilename>
+    <multiplayer supported="true"/>
+    <extraSourceFiles>
+        <sourceFile filename="RandomWorldEvents.lua" />
+    </extraSourceFiles>
+</modDesc>

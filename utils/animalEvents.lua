@@ -1,5 +1,5 @@
 -- =========================================================
--- Random World Events (version 1.2.0.0)
+-- Random World Events (version 1.3.0.0)
 -- =========================================================
 -- Random events that can occur. Settings can be changed!
 -- =========================================================
@@ -63,8 +63,7 @@ local animalEvents = {
 }
 
 for _, e in pairs(animalEvents) do
-    eventId = eventId + 1
-    RandomWorldEvents.EVENTS[e.name] = {
+    g_RandomWorldEvents:registerEvent({
         name = e.name,
         category = "wildlife",
         weight = 1,
@@ -87,7 +86,7 @@ for _, e in pairs(animalEvents) do
             RandomWorldEvents.EVENT_STATE.livestockSaleMalus = nil
             return "Animal event ended"
         end
-    }
+    })
 end
 
-print("[AnimalEvents] 10 animal events loaded")
+print("[AnimalEvents] Loaded 10 animal events")

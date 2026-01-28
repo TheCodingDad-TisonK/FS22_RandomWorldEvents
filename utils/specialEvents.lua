@@ -1,5 +1,5 @@
 -- =========================================================
--- Random World Events (version 1.2.0.0)
+-- Random World Events (version 1.3.0.0)
 -- =========================================================
 -- Random events that can occur. Settings can be changed!
 -- =========================================================
@@ -68,8 +68,7 @@ local specialEvents = {
 }
 
 for _, e in pairs(specialEvents) do
-    eventId = eventId + 1
-    RandomWorldEvents.EVENTS[e.name] = {
+    g_RandomWorldEvents:registerEvent({
         name = e.name,
         category = "special",
         weight = 1,
@@ -92,7 +91,7 @@ for _, e in pairs(specialEvents) do
             RandomWorldEvents.EVENT_STATE.tradeBonus = nil
             return "Special event ended"
         end
-    }
+    })
 end
 
-print("[SpecialEvents] 10 special events loaded")
+print("[SpecialEvents] Loaded 10 special events")

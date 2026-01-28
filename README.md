@@ -27,9 +27,9 @@ Adds dynamic random events to Farming Simulator 22 to make gameplay more unpredi
 - Works automatically with controlled vehicles
 
 🛠️ **Key Bindings:**
-`F3` → Open mod settings GUI
-`F5` → Print debug table to console
-`F6` → Trigger a random event
+- `F3` → Open mod settings GUI
+- `F5` → Print debug table to console
+- `F6` → Trigger a random event
 
 ---
 

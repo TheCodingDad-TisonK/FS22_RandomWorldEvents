@@ -2,6 +2,7 @@
 
 Adds dynamic random events to Farming Simulator 22 to make gameplay more unpredictable and exciting.
 
+- **Repository:** https://github.com/TheCodingDad-TisonK/FS22_RandomWorldEvents
 - **Wiki:** https://github.com/TheCodingDad-TisonK/FS22_RandomWorldEvents/wiki
 - **KingMods:** https://www.kingmods.net/en/fs22/mods/73950/random-world-events
 - **Modhoster:** https://www.modhoster.de/mods/zufallige-weltereignisse (not published by me on that platform)

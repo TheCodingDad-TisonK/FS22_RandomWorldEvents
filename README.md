@@ -12,7 +12,7 @@ Adds dynamic random events to Farming Simulator 22 to make gameplay more unpredi
 
 ## 📌 Overview
 
-**Random World Events** introduces 20 random events that occur during gameplay, such as economic changes, vehicle issues, weather anomalies, field bonuses, and special events. Events can affect money, vehicle wear, time speed, crop yields, animal production, and more.
+**Random World Events** introduces 60+ random events that occur during gameplay, such as economic changes, vehicle issues, weather anomalies, field bonuses, and special events. Events can affect money, vehicle wear, time speed, crop yields, animal production, and more.
 
 ---
 

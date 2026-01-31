@@ -1,5 +1,5 @@
 -- =========================================================
--- Random World Events (version 1.3.0.0)
+-- Random World Events (version 1.3.0.5)
 -- =========================================================
 -- Random events that can occur. Settings can be changed!
 -- =========================================================
@@ -65,6 +65,109 @@ local specialEvents = {
         RandomWorldEvents.EVENT_STATE.tradeBonus = true 
         return "Better trade prices!" 
     end},
+    
+    -- 10 NEW SPECIAL EVENTS
+    
+    {name="animal_productivity_surge", minI=1, func=function(intensity)
+        RandomWorldEvents.EVENT_STATE.animalProductivity = 0.25 + 0.10 * intensity
+        RandomWorldEvents.EVENT_STATE.animalProductivityDuration = 45 * intensity
+        return string.format("Animal productivity surge! +%.0f%% milk/eggs/wool", RandomWorldEvents.EVENT_STATE.animalProductivity * 100)
+    end},
+    
+    {name="supernatural_harvest", minI=2, func=function(intensity)
+        local bonus = math.random(10000, 25000) * intensity
+        g_currentMission:addMoney(bonus, getFarmId(), MoneyType.OTHER, true)
+        RandomWorldEvents.EVENT_STATE.supernaturalGrowth = true
+        RandomWorldEvents.EVENT_STATE.supernaturalDuration = 20 * intensity
+        return string.format("Supernatural harvest! Mysterious bounty of €%s", g_i18n:formatMoney(bonus, 0, true, true))
+    end},
+    
+    {name="alien_technology", minI=3, func=function(intensity)
+        RandomWorldEvents.EVENT_STATE.alienTech = {
+            speedBoost = 0.50 + 0.25 * intensity,
+            fuelEfficiency = 0.75,
+            duration = 30 * intensity
+        }
+        return string.format("Alien technology discovered! Equipment speed +%.0f%%, Fuel efficiency +%.0f%%",
+            RandomWorldEvents.EVENT_STATE.alienTech.speedBoost * 100,
+            RandomWorldEvents.EVENT_STATE.alienTech.fuelEfficiency * 100)
+    end},
+    
+    {name="time_portal", minI=4, func=function(intensity)
+        -- Jump forward or backward in time
+        local timeJump = math.random(-12, 12) * 60 * 60 * 1000 * intensity -- +/- up to 12 hours
+        g_currentMission.environment.dayTime = g_currentMission.environment.dayTime + timeJump
+        
+        if timeJump > 0 then
+            return string.format("TIME PORTAL! Jumped forward %.1f hours", timeJump / (60 * 60 * 1000))
+        else
+            return string.format("TIME PORTAL! Jumped back %.1f hours", math.abs(timeJump) / (60 * 60 * 1000))
+        end
+    end},
+    
+    {name="dimensional_rift", minI=3, func=function(intensity)
+        -- Random teleportation of vehicles/equipment
+        RandomWorldEvents.EVENT_STATE.dimensionalRift = true
+        RandomWorldEvents.EVENT_STATE.dimensionalRiftIntensity = intensity
+        RandomWorldEvents.EVENT_STATE.dimensionalRiftDuration = 15 * intensity
+        return "DIMENSIONAL RIFT! Equipment may teleport randomly!"
+    end},
+    
+    {name="mythical_creature_sighting", minI=1, func=function(intensity)
+        RandomWorldEvents.EVENT_STATE.mythicalCreature = {
+            type = math.random(1, 4), -- 1: Unicorn, 2: Dragon, 3: Phoenix, 4: Yeti
+            luckBonus = 0.20 + 0.10 * intensity,
+            duration = 25 * intensity
+        }
+        local creatureNames = {"Unicorn", "Dragon", "Phoenix", "Yeti"}
+        return string.format("MYTHICAL SIGHTING! %s appears bringing +%.0f%% luck!",
+            creatureNames[RandomWorldEvents.EVENT_STATE.mythicalCreature.type],
+            RandomWorldEvents.EVENT_STATE.mythicalCreature.luckBonus * 100)
+    end},
+    
+    {name="parallel_farm_merge", minI=2, func=function(intensity)
+        local parallelBonus = math.random(15000, 35000) * intensity
+        g_currentMission:addMoney(parallelBonus, getFarmId(), MoneyType.OTHER, true)
+        RandomWorldEvents.EVENT_STATE.parallelResources = 0.15 * intensity
+        RandomWorldEvents.EVENT_STATE.parallelDuration = 35 * intensity
+        return string.format("PARALLEL FARM MERGE! +€%s and +%.0f%% resources from alternate reality",
+            g_i18n:formatMoney(parallelBonus, 0, true, true),
+            RandomWorldEvents.EVENT_STATE.parallelResources * 100)
+    end},
+    
+    {name="weather_control_device", minI=3, func=function(intensity)
+        RandomWorldEvents.EVENT_STATE.weatherControl = {
+            sunnyDays = 3 * intensity,
+            rainWhenNeeded = true,
+            noStorms = true,
+            duration = 60 * intensity
+        }
+        return string.format("WEATHER CONTROL DEVICE! Perfect weather for %d days", 3 * intensity)
+    end},
+    
+    {name="quantum_entangled_crops", minI=2, func=function(intensity)
+        RandomWorldEvents.EVENT_STATE.quantumCrops = {
+            growthSpeed = 2.0 + 1.0 * intensity,
+            yieldMultiplier = 1.5 + 0.5 * intensity,
+            randomMutation = true,
+            duration = 40 * intensity
+        }
+        return string.format("QUANTUM ENTANGLED CROPS! Growth ×%.1f, Yield ×%.1f",
+            RandomWorldEvents.EVENT_STATE.quantumCrops.growthSpeed,
+            RandomWorldEvents.EVENT_STATE.quantumCrops.yieldMultiplier)
+    end},
+    
+    {name="reality_glitch", minI=1, func=function(intensity)
+        -- Various random glitches
+        RandomWorldEvents.EVENT_STATE.realityGlitch = {
+            floatingObjects = true,
+            colorInversion = intensity >= 2,
+            gravityFluctuations = intensity >= 3,
+            soundDistortion = true,
+            duration = 10 * intensity
+        }
+        return "REALITY GLITCH! Strange phenomena occurring..."
+    end}
 }
 
 for _, e in pairs(specialEvents) do
@@ -89,9 +192,18 @@ for _, e in pairs(specialEvents) do
             RandomWorldEvents.EVENT_STATE.durabilityBoost = nil
             RandomWorldEvents.EVENT_STATE.durabilityMalus = nil
             RandomWorldEvents.EVENT_STATE.tradeBonus = nil
+            RandomWorldEvents.EVENT_STATE.animalProductivity = nil
+            RandomWorldEvents.EVENT_STATE.supernaturalGrowth = nil
+            RandomWorldEvents.EVENT_STATE.alienTech = nil
+            RandomWorldEvents.EVENT_STATE.dimensionalRift = nil
+            RandomWorldEvents.EVENT_STATE.mythicalCreature = nil
+            RandomWorldEvents.EVENT_STATE.parallelResources = nil
+            RandomWorldEvents.EVENT_STATE.weatherControl = nil
+            RandomWorldEvents.EVENT_STATE.quantumCrops = nil
+            RandomWorldEvents.EVENT_STATE.realityGlitch = nil
             return "Special event ended"
         end
     })
 end
 
-print("[SpecialEvents] Loaded 10 special events")
+print("[SpecialEvents] Loaded 20 special events")

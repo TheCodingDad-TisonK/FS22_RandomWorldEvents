@@ -1,5 +1,5 @@
 -- =========================================================
--- Random World Events (version 1.3.0.0)
+-- Random World Events (version 1.3.0.5)
 -- =========================================================
 -- Random events that can occur. Settings can be changed!
 -- =========================================================
@@ -25,7 +25,7 @@ local function getFarmMoney()
 end
 
 -- =====================
--- ECONOMIC EVENTS (15)
+-- ECONOMIC EVENTS (25)
 -- =====================
 local economicEvents = {
     {name="government_subsidy", minI=1, func=function(intensity) 
@@ -167,6 +167,94 @@ local economicEvents = {
             duration = 25 * intensity
         }
         return string.format("Inflation spike! Purchase costs +%.0f%%", RandomWorldEvents.EVENT_STATE.inflation.purchaseCostIncrease * 100)
+    end},
+    
+    -- 10 NEW ECONOMIC EVENTS
+    
+    {name="harvest_bounty", minI=1, func=function(intensity)
+        RandomWorldEvents.EVENT_STATE.harvestBonus = 0.15 + 0.05 * intensity
+        RandomWorldEvents.EVENT_STATE.harvestBonusDuration = 40 * intensity
+        return string.format("Bountiful harvest! Crop yields +%.0f%%", RandomWorldEvents.EVENT_STATE.harvestBonus * 100)
+    end},
+    
+    {name="crop_failure", minI=2, func=function(intensity)
+        RandomWorldEvents.EVENT_STATE.cropMalus = 0.20 + 0.08 * intensity
+        RandomWorldEvents.EVENT_STATE.cropMalusDuration = 35 * intensity
+        return string.format("Crop failure! Yields -%.0f%%", RandomWorldEvents.EVENT_STATE.cropMalus * 100)
+    end},
+    
+    {name="real_estate_boom", minI=1, func=function(intensity)
+        local bonus = 10000 + intensity * 5000
+        g_currentMission:addMoney(bonus, getFarmId(), MoneyType.OTHER, true)
+        RandomWorldEvents.EVENT_STATE.landValueBonus = 0.10 * intensity
+        return string.format("Real estate boom! +€%s bonus, land value +%.0f%%", 
+            g_i18n:formatMoney(bonus, 0, true, true),
+            RandomWorldEvents.EVENT_STATE.landValueBonus * 100)
+    end},
+    
+    {name="labor_shortage", minI=2, func=function(intensity)
+        RandomWorldEvents.EVENT_STATE.laborCostIncrease = 0.25 + 0.10 * intensity
+        RandomWorldEvents.EVENT_STATE.laborShortageDuration = 30 * intensity
+        return string.format("Labor shortage! Worker costs +%.0f%%", RandomWorldEvents.EVENT_STATE.laborCostIncrease * 100)
+    end},
+    
+    {name="technological_breakthrough", minI=3, func=function(intensity)
+        RandomWorldEvents.EVENT_STATE.techBoost = {
+            efficiencyBonus = 0.20 + 0.05 * intensity,
+            fuelSavings = 0.15 + 0.05 * intensity,
+            duration = 50 * intensity
+        }
+        return string.format("Technological breakthrough! Efficiency +%.0f%%, Fuel -%.0f%%",
+            RandomWorldEvents.EVENT_STATE.techBoost.efficiencyBonus * 100,
+            RandomWorldEvents.EVENT_STATE.techBoost.fuelSavings * 100)
+    end},
+    
+    {name="livestock_epidemic", minI=2, func=function(intensity)
+        local loss = math.random(3000, 8000) * intensity
+        g_currentMission:addMoney(-loss, getFarmId(), MoneyType.OTHER, true)
+        RandomWorldEvents.EVENT_STATE.livestockHealthMalus = 0.30 * intensity
+        return string.format("Livestock epidemic! -€%s, animal health -%.0f%%",
+            g_i18n:formatMoney(loss, 0, true, true),
+            RandomWorldEvents.EVENT_STATE.livestockHealthMalus * 100)
+    end},
+    
+    {name="renewable_energy_subsidy", minI=1, func=function(intensity)
+        local subsidy = 12000 * intensity
+        g_currentMission:addMoney(subsidy, getFarmId(), MoneyType.OTHER, true)
+        RandomWorldEvents.EVENT_STATE.energyCostReduction = 0.40 + 0.10 * intensity
+        return string.format("Renewable energy subsidy! +€%s, energy costs -%.0f%%",
+            g_i18n:formatMoney(subsidy, 0, true, true),
+            RandomWorldEvents.EVENT_STATE.energyCostReduction * 100)
+    end},
+    
+    {name="transportation_strike", minI=3, func=function(intensity)
+        RandomWorldEvents.EVENT_STATE.transportationCrisis = {
+            deliveryDelay = 2 * intensity, -- hours
+            costIncrease = 0.35 + 0.15 * intensity,
+            duration = 40 * intensity
+        }
+        return string.format("Transportation strike! Deliveries delayed +%.0fh, costs +%.0f%%",
+            RandomWorldEvents.EVENT_STATE.transportationCrisis.deliveryDelay,
+            RandomWorldEvents.EVENT_STATE.transportationCrisis.costIncrease * 100)
+    end},
+    
+    {name="global_demand_surge", minI=2, func=function(intensity)
+        RandomWorldEvents.EVENT_STATE.globalDemand = {
+            pricePremium = 0.30 + 0.10 * intensity,
+            affectedCrops = {"wheat", "corn", "soybean", "canola"},
+            duration = 55 * intensity
+        }
+        return string.format("Global demand surge! Premium prices +%.0f%% on key crops",
+            RandomWorldEvents.EVENT_STATE.globalDemand.pricePremium * 100)
+    end},
+    
+    {name="weather_insurance_payout", minI=1, func=function(intensity)
+        local payout = math.random(8000, 20000) * intensity
+        g_currentMission:addMoney(payout, getFarmId(), MoneyType.OTHER, true)
+        RandomWorldEvents.EVENT_STATE.weatherInsuranceActive = true
+        RandomWorldEvents.EVENT_STATE.weatherInsuranceDuration = 25 * intensity
+        return string.format("Weather insurance payout! +€%s for recent damages",
+            g_i18n:formatMoney(payout, 0, true, true))
     end}
 }
 
@@ -196,6 +284,16 @@ for _, e in pairs(economicEvents) do
             RandomWorldEvents.EVENT_STATE.tradeEmbargo = nil
             RandomWorldEvents.EVENT_STATE.currencyDeval = nil
             RandomWorldEvents.EVENT_STATE.inflation = nil
+            RandomWorldEvents.EVENT_STATE.harvestBonus = nil
+            RandomWorldEvents.EVENT_STATE.cropMalus = nil
+            RandomWorldEvents.EVENT_STATE.landValueBonus = nil
+            RandomWorldEvents.EVENT_STATE.laborCostIncrease = nil
+            RandomWorldEvents.EVENT_STATE.techBoost = nil
+            RandomWorldEvents.EVENT_STATE.livestockHealthMalus = nil
+            RandomWorldEvents.EVENT_STATE.energyCostReduction = nil
+            RandomWorldEvents.EVENT_STATE.transportationCrisis = nil
+            RandomWorldEvents.EVENT_STATE.globalDemand = nil
+            RandomWorldEvents.EVENT_STATE.weatherInsuranceActive = nil
             return "Economic event ended"
         end
     })
@@ -261,6 +359,36 @@ function RandomWorldEvents:updateEconomicEffects(dt)
                 eventState.inflation.purchaseCostIncrease * 100))
         end
     end
+    
+    -- Apply new economic effects
+    if eventState.harvestBonus then
+        if g_currentMission.time % 40000 < 100 then
+            print(string.format("[EconomicEvent] Bountiful harvest: Yields +%.0f%%", 
+                eventState.harvestBonus * 100))
+        end
+    end
+    
+    if eventState.cropMalus then
+        if g_currentMission.time % 35000 < 100 then
+            print(string.format("[EconomicEvent] Crop failure: Yields -%.0f%%", 
+                eventState.cropMalus * 100))
+        end
+    end
+    
+    if eventState.techBoost then
+        if g_currentMission.time % 50000 < 100 then
+            print(string.format("[EconomicEvent] Tech breakthrough: Efficiency +%.0f%%, Fuel -%.0f%%",
+                eventState.techBoost.efficiencyBonus * 100,
+                eventState.techBoost.fuelSavings * 100))
+        end
+    end
+    
+    if eventState.globalDemand then
+        if g_currentMission.time % 55000 < 100 then
+            print(string.format("[EconomicEvent] Global demand: Premium +%.0f%% on key crops",
+                eventState.globalDemand.pricePremium * 100))
+        end
+    end
 end
 
 -- Integrate with main update
@@ -271,5 +399,5 @@ function RandomWorldEvents:update(dt)
     self:updateEconomicEffects(dt)
 end
 
-print("[EconomicEvents] Loaded 20 advanced economic events")
-print("[EconomicEvents] Features: Tax system, market manipulation, trade effects, inflation, economic crises")
+print("[EconomicEvents] Loaded 30 advanced economic events")
+print("[EconomicEvents] Features: Tax system, market manipulation, trade effects, inflation, economic crises, crop yields, technology, global markets")

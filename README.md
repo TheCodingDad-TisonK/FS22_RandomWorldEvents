@@ -9,7 +9,6 @@ Adds dynamic random events to **Farming Simulator 22**, making gameplay more unp
 [Download Latest Release](https://github.com/TheCodingDad-TisonK/FS22_RandomWorldEvents/releases/latest) •
 [Wiki](https://github.com/TheCodingDad-TisonK/FS22_RandomWorldEvents/wiki) •
 [Report Bug](https://github.com/TheCodingDad-TisonK/FS22_RandomWorldEvents/issues) •
-[Request Feature](https://github.com/TheCodingDad-TisonK/FS22_RandomWorldEvents/issues/new)
 
 ---
 

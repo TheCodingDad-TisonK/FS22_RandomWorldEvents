@@ -22,7 +22,7 @@ Adds dynamic random events to **Farming Simulator 22**, making gameplay more unp
 
 ## 📌 Overview
 
-**Random World Events** introduces **60+ dynamic events** that can occur during gameplay, affecting your economy, vehicles, weather, fields, animals, and more.
+**Random World Events** introduces **80+ dynamic events** that can occur during gameplay, affecting your economy, vehicles, weather, fields, animals, and more.
 
 Events are designed to add unpredictability and immersion, ensuring that no two playthroughs feel the same.
 
